@@ -35,7 +35,7 @@ func (this *Admin) Handle() {
 
     // Get username
     this.conn.SetDeadline(time.Now().Add(60 * time.Second))
-    this.conn.Write([]byte("\033[34;mпользователь\033[33;3m: \033[0m"))
+    this.conn.Write([]byte("\033[34;mUsername\033[33;3m: \033[0m"))
     username, err := this.ReadLine(false)
     if err != nil {
         return
@@ -43,7 +43,7 @@ func (this *Admin) Handle() {
 
     // Get password
     this.conn.SetDeadline(time.Now().Add(60 * time.Second))
-    this.conn.Write([]byte("\033[34;1mпароль\033[33;3m: \033[0m"))
+    this.conn.Write([]byte("\033[34;1mPassword\033[33;3m: \033[0m"))
     password, err := this.ReadLine(true)
     if err != nil {
         return
@@ -53,7 +53,7 @@ func (this *Admin) Handle() {
     this.conn.Write([]byte("\r\n"))
     spinBuf := []byte{'-', '\\', '|', '/'}
     for i := 0; i < 15; i++ {
-        this.conn.Write(append([]byte("\r\033[37;mпроверив счета... \033[31m"), spinBuf[i % len(spinBuf)]))
+        this.conn.Write(append([]byte("\r\033[37;mLoading... \033[31m"), spinBuf[i % len(spinBuf)]))
         time.Sleep(time.Duration(300) * time.Millisecond)
     }
 
@@ -82,9 +82,7 @@ func (this *Admin) Handle() {
     this.conn.Write([]byte("██╔══╝  ██║   ██║██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██║   ██║\r\n"))
     this.conn.Write([]byte("██║     ╚██████╔╝██║  ██║██║ ╚═╝ ██║██║██║ ╚████║╚██████╔╝\r\n"))
     this.conn.Write([]byte("╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝ \r\n"))
-    for i := 0; i < 4; i++ {
-        time.Sleep(100 * time.Millisecond)
-        this.conn.Write([]byte(fmt.Sprintf("Welcome nigga enjoy the net asf! and follow the sentences below!\r\n", i + 1)))
+    this.conn.Write([]byte(fmt.Sprintf("Welcome nigga enjoy the net asf! and follow the sentences below!\r\n", i + 1)))
     }
 
     go func() {
@@ -98,7 +96,7 @@ func (this *Admin) Handle() {
             }
 
             time.Sleep(time.Second)
-            if _, err := this.conn.Write([]byte(fmt.Sprintf("\033]0;%d Bots Connected | %s\007", BotCount, username))); err != nil {
+            if _, err := this.conn.Write([]byte(fmt.Sprintf("\033]0;Loaded %d | %s\007", BotCount, username))); err != nil {
                 this.conn.Close()
                 break
             }
@@ -179,7 +177,7 @@ func (this *Admin) Handle() {
             }
             continue
         }
-        if userInfo.admin == 1 && cmd == "botcount" {
+        if userInfo.admin == 1 && cmd == "bots" || cmd == "botcount" {
             m := clientList.Distribution()
             for k, v := range m {
                 this.conn.Write([]byte(fmt.Sprintf("\033[36;1m%s:\t%d\033[0m\r\n", k, v)))
